@@ -19,12 +19,13 @@ patch -p1 < mimalloc.diff
 cmake \
   -Bout \
   -DCMAKE_BUILD_TYPE=Release \
-  -DMI_BUILD_SHARED=OFF \
   -DMI_BUILD_OBJECT=OFF \
   -DMI_BUILD_TESTS=OFF \
   .
 
 cmake --build out
+
+mv out/libmimalloc.so* /usr/lib
 
 for libc_path in $(find /usr -name libc.a); do
   {

@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: build-image
+        run: |
+          podman build \
+            --network host \
+            --pull \
+            --squash-all \
+            --tag rust:alpine-mimalloc \
+            .
+
+      - name: test-image
+        run: |
+          podman run \
+            --init \
+            --network host \
+            --rm \
+            --tmpfs /tmp:exec \
+            --volume $PWD:/workspace \
+            --workdir /workspace \
+            rust:alpine-mimalloc \
+            sh -c "cargo install names && mv /usr/local/cargo/bin/names ."
+          MIMALLOC_VERBOSE=1 ./names
+          ldd ./names

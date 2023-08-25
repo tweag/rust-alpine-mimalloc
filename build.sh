@@ -10,7 +10,8 @@ apk upgrade --no-cache
 
 apk add --no-cache \
   alpine-sdk \
-  cmake
+  cmake \
+  samurai
 
 curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$MIMALLOC_VERSION.tar.gz | tar xz --strip-components=1
 
@@ -19,13 +20,13 @@ patch -p1 < mimalloc.diff
 cmake \
   -Bout \
   -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX=/usr \
   -DMI_BUILD_OBJECT=OFF \
   -DMI_BUILD_TESTS=OFF \
+  -G Ninja \
   .
 
-cmake --build out
-
-mv out/libmimalloc.so* /usr/lib
+cmake --build out --target install -- -v
 
 for libc_path in $(find /usr -name libc.a); do
   {

@@ -33,6 +33,6 @@ jobs:
             --volume $PWD:/workspace \
             --workdir /workspace \
             rust:alpine-mimalloc \
-            sh -c "cargo install names && mv /usr/local/cargo/bin/names ."
+            sh -c 'cargo install names && mv $CARGO_HOME/bin/names .'
           MIMALLOC_VERBOSE=1 ./names
           ldd ./names

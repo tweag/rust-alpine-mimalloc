@@ -23,6 +23,7 @@ cmake \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DMI_BUILD_OBJECT=OFF \
   -DMI_BUILD_TESTS=OFF \
+  -DMI_SKIP_COLLECT_ON_EXIT=ON \
   -G Ninja \
   .
 

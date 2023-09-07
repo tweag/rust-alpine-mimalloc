@@ -11,7 +11,13 @@ apk upgrade --no-cache
 apk add --no-cache \
   alpine-sdk \
   cmake \
+  mold \
   samurai
+
+{
+  echo "[target.$(rustup target list --installed)]"
+  echo 'rustflags = ["-C", "link-arg=-fuse-ld=mold"]'
+} > $CARGO_HOME/config.toml
 
 curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$MIMALLOC_VERSION.tar.gz | tar xz --strip-components=1
 

@@ -51,4 +51,4 @@ jobs:
             rust:alpine-mimalloc \
             sh -c 'cargo install names && mv $CARGO_HOME/bin/names .'
           MIMALLOC_VERBOSE=1 ./names
-          ldd ./names
+          file ./names

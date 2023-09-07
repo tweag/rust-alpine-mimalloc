@@ -14,10 +14,7 @@ apk add --no-cache \
   mold \
   samurai
 
-{
-  echo "[target.$(rustup target list --installed)]"
-  echo 'rustflags = ["-C", "link-arg=-fuse-ld=mold"]'
-} > $CARGO_HOME/config.toml
+find /usr -type f -executable -name "ld" -exec sh -c 'ln -sf /usr/bin/ld.mold {}' \;
 
 curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$MIMALLOC_VERSION.tar.gz | tar xz --strip-components=1
 

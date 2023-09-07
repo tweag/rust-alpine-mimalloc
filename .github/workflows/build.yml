@@ -7,12 +7,28 @@ on:
 
 jobs:
   build:
-    name: build
+    name: build-${{ matrix.arch }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch:
+          - amd64
+          - arm64v8
     steps:
+
+      - name: install-deps
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            qemu-user-static
 
       - name: checkout
         uses: actions/checkout@v3
+
+      - name: patch-dockerfile
+        run: |
+          sed -i 's@rust:alpine@${{ matrix.arch }}/rust:alpine@' Dockerfile
 
       - name: build-image
         run: |

@@ -10,7 +10,9 @@ apk upgrade --no-cache
 
 apk add --no-cache \
   alpine-sdk \
+  cargo \
   cmake \
+  curl \
   mold \
   samurai
 

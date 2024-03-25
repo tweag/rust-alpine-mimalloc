@@ -1,4 +1,4 @@
-FROM rust:alpine
+FROM alpine:edge
 
 COPY build.sh mimalloc.diff /tmp/
 

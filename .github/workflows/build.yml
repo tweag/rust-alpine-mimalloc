@@ -2,6 +2,8 @@ name: build
 
 on:
   push:
+    branches:
+      - master
   pull_request:
   workflow_dispatch:
 
@@ -14,25 +16,19 @@ jobs:
       matrix:
         arch:
           - amd64
-          - arm64v8
+          - arm64/v8
     steps:
 
-      - name: install-deps
-        run: |
-          sudo apt update
-          sudo apt install -y \
-            qemu-user-static
+      - name: setup-podman
+        uses: TerrorJack/setup-podman@master
 
       - name: checkout
-        uses: actions/checkout@v3
-
-      - name: patch-dockerfile
-        run: |
-          sed -i 's@rust:alpine@${{ matrix.arch }}/rust:alpine@' Dockerfile
+        uses: actions/checkout@v4
 
       - name: build-image
         run: |
           podman build \
+            --arch ${{ matrix.arch }} \
             --network host \
             --pull \
             --squash-all \
@@ -42,6 +38,7 @@ jobs:
       - name: test-image
         run: |
           podman run \
+            --arch ${{ matrix.arch }} \
             --init \
             --network host \
             --rm \
@@ -49,6 +46,6 @@ jobs:
             --volume $PWD:/workspace \
             --workdir /workspace \
             rust:alpine-mimalloc \
-            sh -c 'cargo install names && mv $CARGO_HOME/bin/names .'
-          MIMALLOC_VERBOSE=1 ./names
-          file ./names
+            /workspace/test.sh
+          MIMALLOC_VERBOSE=1 ./bin/names
+          file ./bin/names

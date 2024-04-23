@@ -2,7 +2,7 @@
 
 set -eu
 
-MIMALLOC_VERSION=2.1.2
+MIMALLOC_VERSION=2.1.4
 
 cd /tmp
 

@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: build-${{ matrix.arch }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:

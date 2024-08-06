@@ -1,6 +1,6 @@
 # `rust-alpine-mimalloc`
 
-This Docker image builds upon the `alpine:edge` image, provides
+This Docker image builds upon the `alpine:latest` image, provides
 `cargo`/`rustc` and replaces the default musl malloc implementation
 with [`mimalloc`](https://github.com/microsoft/mimalloc). If you build
 Rust or C/C++ static executables in this image, the resulting

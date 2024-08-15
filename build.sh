@@ -14,7 +14,7 @@ apk add --no-cache \
   cmake \
   curl \
   mold \
-  samurai
+  ninja-is-really-ninja
 
 find /usr -type f -executable -name "ld" -exec sh -c 'ln -sf /usr/bin/ld.mold {}' \;
 

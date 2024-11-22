@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 
 COPY build.sh mimalloc.diff /tmp/
 

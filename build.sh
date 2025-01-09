@@ -18,9 +18,11 @@ apk add --no-cache \
 
 find /usr -type f -executable -name "ld" -exec sh -c 'ln -sf /usr/bin/ld.mold {}' \;
 
-curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$MIMALLOC_VERSION.tar.gz | tar xz --strip-components=1
+curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$MIMALLOC_VERSION.tar.gz | tar xz
 
-patch -p1 < mimalloc.diff
+cd mimalloc-$MIMALLOC_VERSION
+
+patch -p1 < /tmp/mimalloc.diff
 
 cmake \
   -Bout \
@@ -45,4 +47,7 @@ for libc_path in $(find /usr -name libc.a); do
   mv libc.a $libc_path
 done
 
-rm -rf /tmp/*
+rm -rf \
+  /tmp/build.sh \
+  /tmp/mimalloc.diff \
+  /tmp/mimalloc-$MIMALLOC_VERSION

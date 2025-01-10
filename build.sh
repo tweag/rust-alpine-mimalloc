@@ -11,6 +11,7 @@ apk upgrade --no-cache
 apk add --no-cache \
   alpine-sdk \
   cargo \
+  clang \
   cmake \
   curl \
   mold \
@@ -27,9 +28,11 @@ patch -p1 < /tmp/mimalloc.diff
 cmake \
   -Bout \
   -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_C_COMPILER=clang \
   -DCMAKE_INSTALL_PREFIX=/usr \
   -DMI_BUILD_OBJECT=OFF \
   -DMI_BUILD_TESTS=OFF \
+  -DMI_LIBC_MUSL=ON \
   -DMI_SKIP_COLLECT_ON_EXIT=ON \
   -G Ninja \
   .

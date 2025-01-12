@@ -1,0 +1,11 @@
+[env]
+CC = "clang"
+CXX = "clang++"
+
+[target.x86_64-alpine-linux-musl]
+linker = "clang"
+rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-Wl,-z,stack-size=8388608"]
+
+[target.aarch64-alpine-linux-musl]
+linker = "clang"
+rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-Wl,-z,stack-size=8388608"]

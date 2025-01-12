@@ -13,7 +13,7 @@ continue to link against `mimalloc` as intended, but you need extra
 command-line arguments to ensure they are indeed static:
 
 ```sh
-$ RUSTFLAGS="-C target-feature=+crt-static" cargo install --target x86_64-alpine-linux-musl foo
+$ cargo install --target x86_64-alpine-linux-musl foo
 ```
 
 The `--target` flag is required. The default target is either

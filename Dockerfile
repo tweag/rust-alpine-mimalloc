@@ -1,6 +1,8 @@
 FROM alpine:latest
 
-COPY build.sh mimalloc.diff /tmp/
+COPY .cargo /root/.cargo
+
+COPY build.sh mimalloc.diff /tmp
 
 RUN /tmp/build.sh
 

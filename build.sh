@@ -2,7 +2,7 @@
 
 set -eu
 
-MIMALLOC_VERSION=3.0.1
+MIMALLOC_VERSION=3.0.3
 
 cd /tmp
 
@@ -23,6 +23,7 @@ curl -f -L --retry 5 https://github.com/microsoft/mimalloc/archive/refs/tags/v$M
 
 cd mimalloc-$MIMALLOC_VERSION
 
+patch -p1 < /tmp/0001-Revert-Merge-branch-dev-into-dev3.patch
 patch -p1 < /tmp/mimalloc.diff
 
 cmake \
@@ -51,6 +52,7 @@ for libc_path in $(find /usr -name libc.a); do
 done
 
 rm -rf \
+  /tmp/0001-Revert-Merge-branch-dev-into-dev3.patch \
   /tmp/build.sh \
   /tmp/mimalloc.diff \
   /tmp/mimalloc-$MIMALLOC_VERSION

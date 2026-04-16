@@ -2,7 +2,7 @@
 
 set -eu
 
-MIMALLOC_VERSION=3.2.8
+MIMALLOC_VERSION=3.3.0
 
 cd /tmp
 

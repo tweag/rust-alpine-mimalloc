@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 41151e9..c9eb696 100644
+index bdb72b60..4af24f62 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -685,7 +685,6 @@ endif()
+@@ -704,7 +704,6 @@ endif()
  if (MI_BUILD_STATIC)
    add_library(mimalloc-static STATIC ${mi_sources})
    set_property(TARGET mimalloc-static PROPERTY OUTPUT_NAME ${mi_libname})
@@ -11,10 +11,10 @@ index 41151e9..c9eb696 100644
    target_compile_options(mimalloc-static PRIVATE ${mi_cflags} ${mi_cflags_static})
    target_link_libraries(mimalloc-static PRIVATE ${mi_libraries})
 diff --git a/src/alloc-override.c b/src/alloc-override.c
-index f1d8e8f..722cf17 100644
+index 93d066dc..41c088ae 100644
 --- a/src/alloc-override.c
 +++ b/src/alloc-override.c
-@@ -272,7 +272,7 @@ typedef void* mi_nothrow_t;
+@@ -271,7 +271,7 @@ typedef void* mi_nothrow_t;
    void* operator new[](std::size_t n, std::align_val_t al, const std::nothrow_t&) noexcept { return mi_new_aligned_nothrow(n, static_cast<size_t>(al)); }
    #endif
  

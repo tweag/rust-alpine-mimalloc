@@ -9,18 +9,14 @@ on:
 
 jobs:
   build:
-    name: build-${{ matrix.arch }}
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        arch:
-          - amd64
-          - arm64/v8
+        os:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
     steps:
-
-      - name: setup-podman
-        uses: TerrorJack/setup-podman@master
 
       - name: checkout
         uses: actions/checkout@v6
@@ -28,7 +24,6 @@ jobs:
       - name: build-image
         run: |
           podman build \
-            --arch ${{ matrix.arch }} \
             --network host \
             --pull \
             --squash-all \
@@ -38,7 +33,6 @@ jobs:
       - name: test-image
         run: |
           podman run \
-            --arch ${{ matrix.arch }} \
             --init \
             --network host \
             --rm \

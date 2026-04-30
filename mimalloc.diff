@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bdb72b60..4af24f62 100644
+index bdb72b6..4af24f6 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -704,7 +704,6 @@ endif()
@@ -11,7 +11,7 @@ index bdb72b60..4af24f62 100644
    target_compile_options(mimalloc-static PRIVATE ${mi_cflags} ${mi_cflags_static})
    target_link_libraries(mimalloc-static PRIVATE ${mi_libraries})
 diff --git a/src/alloc-override.c b/src/alloc-override.c
-index 93d066dc..41c088ae 100644
+index 93d066d..41c088a 100644
 --- a/src/alloc-override.c
 +++ b/src/alloc-override.c
 @@ -271,7 +271,7 @@ typedef void* mi_nothrow_t;

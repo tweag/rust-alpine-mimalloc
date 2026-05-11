@@ -10,7 +10,6 @@ apk upgrade --no-cache
 
 apk add --no-cache \
   alpine-sdk \
-  cargo \
   clang \
   cmake \
   curl \
@@ -39,7 +38,7 @@ cmake \
 
 cmake --build out --target install -- -v
 
-for libc_path in $(find /usr -name libc.a); do
+for libc_path in $(find /usr "${RUSTUP_HOME:-/usr/local/rustup}" -name libc.a -type f | sort -u); do
   {
     echo "CREATE libc.a"
     echo "ADDLIB $libc_path"
@@ -47,7 +46,7 @@ for libc_path in $(find /usr -name libc.a); do
     echo "ADDLIB out/libmimalloc.a"
     echo "SAVE"
   } | ar -M
-  mv libc.a $libc_path
+  mv libc.a "$libc_path"
 done
 
 rm -rf \

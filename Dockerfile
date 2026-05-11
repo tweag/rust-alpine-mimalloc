@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM ghcr.io/rust-lang/rust:alpine
 
-COPY .cargo /root/.cargo
+COPY .cargo/config.toml /usr/local/cargo/config.toml
 
 COPY build.sh mimalloc.diff /tmp
 

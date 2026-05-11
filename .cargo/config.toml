@@ -2,10 +2,10 @@
 CC = "clang"
 CXX = "clang++"
 
-[target.x86_64-alpine-linux-musl]
+[target.x86_64-unknown-linux-musl]
 linker = "clang"
-rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-Wl,-z,stack-size=8388608"]
+rustflags = ["-C", "link-arg=-Wl,-z,stack-size=8388608"]
 
-[target.aarch64-alpine-linux-musl]
+[target.aarch64-unknown-linux-musl]
 linker = "clang"
-rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-Wl,-z,stack-size=8388608"]
+rustflags = ["-C", "link-arg=-Wl,-z,stack-size=8388608"]
